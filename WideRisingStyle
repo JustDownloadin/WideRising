@@ -1,0 +1,406 @@
+/* ==UserStyle==
+@name           Wide Rising
+@namespace      github.com/openstyles/stylus
+@version        0.0.7
+@description    Wider layout for Flight Rising, plus other improvements.
+@author         Valen
+@license        MIT
+@preprocessor   stylus
+
+
+@var checkbox customSize			"+// Change layout size" 1
+@var range customWidth			"Layout width (not recommended to go under 950, may need extra tweaking)"[950, 950, 1900, 10, 'px']
+	// Second value is the minimum the slider can go to, Third value is the maximum. Change these manually HERE if you need more or less than.
+@var checkbox waywrdStn			"Hide the Which Waystone" 0
+@var checkbox repeatBnnr		"Repeat background images when stretching the layout (avoid empty space at the cost of aesthetics)" 0
+
+==/UserStyle== */
+
+@-moz-document domain("flightrising.com") {
+
+/* +// Change layout size */
+
+	/*GENERIC REFERENCES == Default value // formula ('x' in 'size-X' always the difference between 950 and the specific element ('x')*/
+		size-750 = customWidth - 200px
+		size-730 = customWidth - 220px
+		size-725 = customWidth - 225px
+		size-720 = customWidth - 230px
+		size-715 = customWidth - 235px
+		size-700 = customWidth - 250px
+		size-680 = customWidth - 270px
+		size-670 = customWidth - 280px
+		size-650 = customWidth - 300px
+		size-600 = customWidth - 350px
+		size-570 = customWidth - 380px
+		size-520 = customWidth - 430px
+		size-510 = customWidth - 440px
+		size-450 = customWidth - 500px
+		size-440 = customWidth - 510px
+		size-420 = customWidth - 530px
+		size-415 = customWidth - 535px
+		size-400 = customWidth - 550px
+		size-340 = customWidth - 610px
+		/*Uncertain how global these margin-X formulas are, but better to have them handy i guess*/
+		margin-msg = ((700 - 677) / 2)
+		
+		margin-700 = (0.5 * (size-700)) - 350px
+		margin-400 = (0.5 * customWidth) - 300px
+		margin-35 = ( (31/190) * customWidth) - 120px
+		fuckingNerdLol = (((9 * size-700) / 20) - 315)
+	
+		/* there's probably a better way to handle these... but tbh i don't really know. once i'm done with stuff i can try and make One All-Encopassing Formula */
+		
+	if(customSize==1) {
+
+
+	/* === 
+
+		Generic width tweaks
+		
+	=== */
+
+		#content,
+		#loginarea,
+		#loginarea > div,
+		.container, .banner,
+ 		.users-online{
+			max-width: customWidth!important;
+			width:100%!important;
+			}
+			
+		.ways_button { /*Probably make a function so the wayward stone stays on-screen if the layout becomes too large*/
+			margin-left: (customWidth/2);
+			}
+			
+		.custom-shops-list,
+ 		.main,
+ 		#dragon-profile-scene,
+ 		#dragon-profile.common-row {
+			width: size-750;
+			}
+			
+		#super-container {
+			width: size-730!important;
+			}
+			
+		.recipe-list { /*Baldwin recipes*/
+			width: size-725;
+			}
+		
+		#ticketgrid {
+			width: size-720;
+			}
+			
+		#nest-o-matic,
+		#custom-shop-trades-frame,
+		#super-container > div:last-of-type,
+		#super-container > div:last-of-type >,
+		.divider {
+			width: size-700!important;
+			}
+		
+		.inner-content, #msgactions { /*idk why these don't wanna work when grouped with the others - probably that scuffed selector*/
+			width: size-700!important;
+			}
+			
+		#msg-header, #msg-show { /*DMs*/
+			width: size-700; 
+			margin-left: auto;
+			}
+			
+		
+			
+		#dragon-profile-bio.dragon-profile-bio,
+ 		#dragon-profile-bio.dragon-profile-vista-bio {
+			width: size-680;
+			}
+			
+		table#forum-fr,
+ 		table#forum-general {
+			width: size-670;
+			}
+			
+		#form-header /*DMs*/ {
+			width: size-650
+			}
+			
+		.dev-tracker-search-results > .common-bubble-frame > .common-bubble {
+			width: size-600;
+			}
+			
+		textarea#message {
+			width: size-570;
+			}
+			
+		#msg-text {
+			width: size-520;
+			}
+			
+		.archaeology-dig-site-index-row-details {
+			width: size-510;
+			}
+			
+		.contentcontainer.home-contentcontainer > .main,
+ 		.contentcontainer.home-contentcontainer > .main > .content,
+ 		.clan-profile-main,
+ 		#table-header,
+ 		#ajaxbody table {
+			width: size-440;
+			}
+
+		hr.announce-separator {
+			width: size-415;
+			}
+		
+		#home-content > .announcement {
+			width: size-400;
+			}
+		
+
+	/* === 
+
+		Generic margin tweaks
+		
+ 	=== */
+
+		#form-header, #msg-editor /*Send DMs form*/ {
+			margin-left: margin-msg;
+			margin-right: margin-msg;
+			}
+
+		#nest_dad,
+		#archaeology-npc-text,
+		.gather_container > .gather_row:nth-of-type(1) > .gather_box:first-child, /*Meat*/
+		.gather_container > .gather_row:nth-of-type(2) > .gather_box:first-child /*Plants*/ {
+			margin-left: margin-700;
+			}
+			
+		#nest_mom,
+		.gather_container > .gather_row:nth-of-type(1) > .gather_box:last-child, /*Bugs*/
+		.gather_container > .gather_row:nth-of-type(2) > .gather_box:last-child /*Scavenging*/ {
+			margin-right: margin-700;
+			}
+		
+		#gather_collect_buttons {
+			left: margin-400;
+			}
+		
+		.bestiary-familiar-box > .bestiary-familiar-tumbnail-frame .common-animated-familiar {/*Bestiary*/
+			left: margin-35;
+			}
+		
+		#ajaxbody table { /*Messages*/
+			margin: auto;
+			}
+			
+		#trading-post-content .common-row {
+			margin-left: fuckingNerdLol;
+			margin-right: fuckingNerdLol;	
+			} 
+
+			
+	/* === 
+
+		Specific code
+		
+ 	=== */		
+	
+		#clan-profile .common-bubble {/*Clan comments*/
+			width: ((96 / 95) * size-420) - 85px;
+			}
+
+		.onecol .main {/*Lair*/
+			width: size-750;
+			padding-bottom:650px;
+			}
+	
+		#archaeology-dig-plots,
+ 		#predict-morphology {/*Digsite minigame & morphology*/
+			margin: 0 auto;
+			}
+		
+		#archaeology-settings .common-row > .common-column:nth-of-type(1) { /*Digsite settings*/
+			display:none;
+			}
+			
+		#archaeology-settings .common-row > .common-column:nth-of-type(2) {
+			width:100%;
+			}
+			
+		#trading-post-content .common-column { /*Trading post*/
+			width: 210px;
+			}
+			
+		.post-text { /*Forum posts*/
+			width: size-700 - 145px;
+			}
+		
+		.custom-shop-trade,
+ 		.recipe { /*Grand Exchange, Baldwin*/
+			width: 47%;
+			/*Remember to calculate margins later...*/
+			}
+
+		.achievement-item-details-1 {
+			width: size-700 - 435px;
+			}
+			
+		#super-container {
+			margin-bottom: 1260.2px!important;
+			}
+			
+		#super-container > div:last-of-type > div:first-child {
+			width: 40%!important;
+			}
+			
+		#super-container > div:last-of-type > div:last-child {
+			width: ((( 375 / 700 )) * 100)%!important;
+			}
+			
+		#super-container > div:last-of-type > img {
+			left:45%!important;
+			}
+		
+		.contentcontainer {
+			background-image:none;
+			background-color: #dad6c8;
+			}
+			
+		.leftcolumn { /*For the Settings page and its really weird shenanigans...*/
+			background-color: #dad6c8;
+			border:none;
+			border-bottom-left-radius: 10px;
+			}
+			
+		.main {
+			background-color: #fff;
+			margin-bottom: 0;
+			}
+			
+		.editor-text { /*Forum message editor*/
+			width: size-700 - 147;
+			}
+					
+		.market-item-result {
+			width: (( size-700 - 54 ) / 2)px;
+			}
+			
+		#dominance-background-image {
+			right: (0.5 * size-750) - 375px;
+			}
+			
+		#dragon-profile > .dragon-profile-interactives.common-column {
+			width: ((73/150) * size-750) - 175px;
+			}
+			
+		#dragon-profile > .dragon-profile-dragon.common-column {
+			width: ((142/375) * size-750) + 66px;
+			}
+			
+		#dragon-profile-secondary > .dragon-profile-interactives.common-column,
+ 		#dragon-profile-owner-buttons > .dragon-profile-interactives.common-column,
+		#dragon-profile-details-style {
+			width: ((8/35) * size-700);
+			}
+			
+		#dragon-profile-secondary > .dragon-profile-dragon.common-column,
+ 		#dragon-profile-owner-buttons > .dragon-profile-dragon.common-column,
+ 		#dragon-profile-details-misc {
+			width: 0.5 * size-700;
+			}
+			
+		#dragon-profile-secondary > .dragon-profile-familiar.common-column,
+		#dragon-profile-owner-buttons > .dragon-profile-familiar.common-column,
+		#dragon-profile-details-lineage {
+			width: ((19/70) * size-700);
+			}
+			
+
+		form#new{ /*DMs*/
+			width: customWidth - 273px;	/*677px*/
+			}
+
+		#msg-editor { /*DMs*/
+			width: customWidth - 285px!important; /*665px*/
+			}
+			
+		#msg-show { /*DMs*/
+			margin-bottom: 10px;
+			}
+			
+
+			
+		/*#form-header {
+			padding-left:0;
+			text-indent:20px;
+			}*/
+			
+
+		/*TO DO: Dressing Room, Trading Post vendors, Clan home button*/
+
+
+
+		/*TO DO: make background images fit*/
+
+			
+			/*Image upscaling; will need a lot of work, maybe fetch higher resolution images when able to like for dragons at the lair etc. Can't with announcements tho
+			if(imgUpscale==1) *TO DO - terminar esto!!!!!!!*/
+			
+				/*Main page*/
+				/*.announce-text > .bbcode_center { /*Center box*/ /*
+					max-height: 210*(customWidth/950);
+					height:100%;
+				}
+				.announce-text > .bbcode_center > a > img { /*Normal announcements*/ /*
+					max-width:100%;
+					height:100%;
+				}
+				.announce-text > .bbcode_center:nth-of-type(2),
+ 				.announce-text > .bbcode_center:nth-of-type(3){ /*Stops the announcement footers from having huge white space gaps in-between*/ /*)
+					height:2.25%;
+				}
+				.announce-text > .bbcode_center > img { /*Festivals*/ /*
+					max-height:65*(customWidth/950);
+					height:(customWidth/6.5);
+				}
+				.bbcode_img [src="https://flightrising.com/dropbox/updates/devupdate.png"] {
+					max-height:118*(customWidth/950);
+					height:100%;
+				}
+				/*Lair*/ /*
+				.lair-page-dragons, .lair-page-dragon, .lair-page-dragon-box {
+					max-height: 167*(customWidth/950);
+					height:100%;
+				}
+				.lair-page-dragons .lair-page-dragon .lair-page-dragon-box {
+					max-height: 132*(customWidth/950);
+					height:100%;
+				}
+				.lair-page-dragons .lair-page-dragon .lair-page-dragon-box .lair-page-dragon-tumbnail,
+ 				.lair-page-dragons .lair-page-dragon .lair-page-dragon-box .lair-page-dragon-tumbnail img { /*Lair dragons*/ /*
+					text-align:center;
+					max-height: 100*(customWidth/950);
+					height:100%;
+				}
+			}*/
+	}
+
+	if(waywrdStn==1) {
+		.ways_button,
+ 		a[href="https://www1.flightrising.com/waystone"]{
+			display:none;
+			/* this is something you can do in the site itself, but this is more practical */
+		}
+		
+	}
+
+	if(repeatBnnr==1) { /*I'll try to come up with a more elegant solution to some of these in the future...*/
+		body,
+		.market-item-result.market-flash-result,
+ 		.banner,
+ 		#dragon-profile-scene {
+			background-repeat: repeat-x;
+			}
+	}
+		
+}
