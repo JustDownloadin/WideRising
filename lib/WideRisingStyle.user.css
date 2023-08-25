@@ -1,12 +1,12 @@
 /* ==UserStyle==
 @name           Wide Rising
-@namespace      github.com/openstyles/stylus
-@version        0.4.1
-@description    Wider layout for Flight Rising, plus other improvements.
 @author         Valen
+@namespace      https://userstyles.world/user/JustDownloadin
+@version        0.4.8
+@description    Wider layout for Flight Rising plus other improvements.
 @license        MIT
 @preprocessor   stylus
-@updateURL	https://raw.githubusercontent.com/JustDownloadin/WideRising/main/lib/WideRisingStyle.user.css
+@updateURL	https://github.com/JustDownloadin/WideRising/raw/main/lib/WideRisingStyle.user.css
 
 
 @var checkbox customSize			"+// Change layout size" 1
@@ -14,23 +14,35 @@
 	// Second value is the minimum the slider can go to, Third value is the maximum. Change these manually HERE if you need more or less than.
 @var checkbox waywrdStn			"Hide the Which Waystone" 0
 @var checkbox repeatBnnr		"Repeat background images when stretching the layout (avoid empty space at the cost of aesthetics)" 0
+@var range tomoWidth			"Width of the Tomo speech bubble" [320, 320, 1000, 5,'px']
 
 ==/UserStyle== */
+/*
+Please report any bugs or issues you may have: https://wachi-delectrico.tumblr.com
+
+If you like this, support me!
+https://ko-fi.com/valensart
+https://ko-fi.com/valensart
+https://ko-fi.com/valensart
+*/
 
 @-moz-document domain("flightrising.com") {
 
 
-/* +// Change layout size */
 
 	/*GENERIC REFERENCES == Default value // formula ('x' in 'size-X' always the difference between 950 and the specific element ('x')*/
 		size-750 = customWidth - 200px
+		size-735 = customWidth - 215px
 		size-730 = customWidth - 220px
 		size-725 = customWidth - 225px
 		size-720 = customWidth - 230px
 		size-715 = customWidth - 235px
 		size-700 = customWidth - 250px
+		size-692 = customWidth - 258px
 		size-680 = customWidth - 270px
+		size-677 = customWidth - 273px
 		size-670 = customWidth - 280px
+		size-665 = customWidth - 285px
 		size-650 = customWidth - 300px
 		size-600 = customWidth - 350px
 		size-570 = customWidth - 380px
@@ -41,30 +53,30 @@
 		size-420 = customWidth - 530px
 		size-415 = customWidth - 535px
 		size-400 = customWidth - 550px
+		size-350 = customWidth - 600px
 		size-340 = customWidth - 610px
 		/*Uncertain how global these margin-X formulas are, but better to have them handy i guess*/
 		margin-msg = ((700 - 677) / 2)
 		margin-700 = (0.5 * (size-700)) - 350px
+		margin-735 = (0.5 * (size-735)) - (735/2)px
 		margin-400 = (0.5 * customWidth) - 300px
 		margin-35 = ( (31/190) * customWidth) - 120px
 		fuckingNerdLol = (((9 * size-700) / 20) - 315)
+		margin-Swipp = ((63/125) * size-750) - 403px
+		famNerd = ((1/4) * customWidth - (149/2))
 	
 		/* there's probably a better way to handle these... but tbh i don't really know. once i'm done with stuff i can try and make One All-Encopassing Formula */
 		
 	if(customSize==1) {
+		/*Making it a toggle is good for testing's sake*/
 
-
-	/* === 
+/* ========================== 
 
 		Generic width tweaks
 		
-	=== */
+=========================== */
 
-		#content,
-		#loginarea,
-		#loginarea > div,
-		.container, .banner,
- 		.users-online{
+		#content, #loginarea, #loginarea > div, .container, .banner, .users-online {
 			max-width: customWidth!important;
 			width:100%!important;
 			}
@@ -73,14 +85,11 @@
 			margin-left: (customWidth/2);
 			}
 			
-		.custom-shops-list,
- 		.main,
- 		#dragon-profile-scene,
- 		#dragon-profile.common-row {
+		.custom-shops-list, .main, #dragon-profile-scene, #dragon-profile.common-row {
 			width: size-750;
 			}
 			
-		#super-container {
+		#super-container, .menu_header {
 			width: size-730!important;
 			}
 			
@@ -92,15 +101,11 @@
 			width: size-720;
 			}
 			
-		#nest-o-matic,
-		#custom-shop-trades-frame,
-		#super-container > div:last-of-type,
-		#super-container > div:last-of-type >,
-		.divider {
+		#nest-o-matic, #custom-shop-trades-frame, #super-container > div:last-of-type, #super-container > div:last-of-type >, .divider {
 			width: size-700!important;
 			}
 		
-		.inner-content, #msgactions { /*idk why these don't wanna work when grouped with the others - probably that scuffed selector*/
+		.inner-content, #msgactions, .menu_content, #dr-outfit-page { /*idk why these don't wanna work when grouped with the others - probably that scuffed selector*/
 			width: size-700!important;
 			}
 			
@@ -109,16 +114,20 @@
 			margin-left: auto;
 			}
 			
-		
-			
-		#dragon-profile-bio.dragon-profile-bio,
- 		#dragon-profile-bio.dragon-profile-vista-bio {
+		#dragon-profile-bio.dragon-profile-bio, #dragon-profile-bio.dragon-profile-vista-bio {
 			width: size-680;
 			}
 			
-		table#forum-fr,
- 		table#forum-general {
+		table#forum-fr, table#forum-general {
 			width: size-670;
+			}
+			
+		form#new{ /*DMs*/
+			width: size-677!important;
+			}
+
+		#msg-editor { /*DMs*/
+			width: size-665!important;
 			}
 			
 		#form-header /*DMs*/ {
@@ -141,11 +150,7 @@
 			width: size-510;
 			}
 			
-		.contentcontainer.home-contentcontainer > .main,
- 		.contentcontainer.home-contentcontainer > .main > .content,
- 		.clan-profile-main,
- 		#table-header,
- 		#ajaxbody table {
+		.contentcontainer.home-contentcontainer > .main, .contentcontainer.home-contentcontainer > .main > .content, .clan-profile-main, #table-header, #ajaxbody table {
 			width: size-440;
 			}
 
@@ -157,37 +162,43 @@
 			width: size-400;
 			}
 		
-
-	/* === 
+		.feat, #dr-saved-outfits {
+			width: size-692
+			}
+		
+/* ========================== 
 
 		Generic margin tweaks
 		
- 	=== */
+=========================== */
 
 		#form-header, #msg-editor /*Send DMs form*/ {
 			margin-left: margin-msg;
 			margin-right: margin-msg;
 			}
 
-		#nest_dad,
-		#archaeology-npc-text,
-		.gather_container > .gather_row:nth-of-type(1) > .gather_box:first-child, /*Meat*/
-		.gather_container > .gather_row:nth-of-type(2) > .gather_box:first-child /*Plants*/ {
+		#raffle-background, #raffle-slots {
+			left: margin-735;
+			}
+			
+		#nest_dad, #archaeology-npc-text, #crim-text, #glorious-gift-text, #fantastic-familiar-text, .gather_container > .gather_row:nth-of-type(1) > .gather_box:first-child, /*Meat*/ .gather_container > .gather_row:nth-of-type(2) > .gather_box:first-child /*Plants*/ {
 			margin-left: margin-700;
 			}
 			
-		#nest_mom,
-		.gather_container > .gather_row:nth-of-type(1) > .gather_box:last-child, /*Bugs*/
-		.gather_container > .gather_row:nth-of-type(2) > .gather_box:last-child /*Scavenging*/ {
+		#nest_mom, .gather_container > .gather_row:nth-of-type(1) > .gather_box:last-child, /*Bugs*/ .gather_container > .gather_row:nth-of-type(2) > .gather_box:last-child /*Scavenging*/ {
 			margin-right: margin-700;
 			}
 		
+		#dr-outfit-page > div:nth-of-type(3) {
+			margin-left: margin-700!important;
+			}
+			
 		#gather_collect_buttons {
 			left: margin-400;
 			}
-		
+			
 		.bestiary-familiar-box > .bestiary-familiar-tumbnail-frame .common-animated-familiar {/*Bestiary*/
-			left: margin-35;
+			left: margin-35!important;
 			}
 		
 		#ajaxbody table { /*Messages*/
@@ -199,12 +210,19 @@
 			margin-right: fuckingNerdLol;	
 			} 
 
+		#swipp, #baldwin #baldwin-himself {
+			left: margin-Swipp;
+			}
+		
+		#tomo-text {
+			width: customWidth - tomoWidth;
+			}
 			
-	/* === 
+/* ========================== 
 
 		Specific code
 		
- 	=== */		
+=========================== */		
 	
 		#clan-profile .common-bubble {/*Clan comments*/
 			width: ((96 / 95) * size-420) - 85px;
@@ -215,8 +233,7 @@
 			padding-bottom:650px;
 			}
 	
-		#archaeology-dig-plots,
- 		#predict-morphology {/*Digsite minigame & morphology*/
+		#archaeology-dig-plots, #predict-morphology {/*Digsite minigame & morphology*/
 			margin: 0 auto;
 			}
 		
@@ -236,8 +253,7 @@
 			width: size-700 - 145px;
 			}
 		
-		.custom-shop-trade,
- 		.recipe { /*Grand Exchange, Baldwin*/
+		.custom-shop-trade, .recipe { /*Grand Exchange, Baldwin*/
 			width: 47%;
 			/*Remember to calculate margins later...*/
 			}
@@ -298,110 +314,95 @@
 			width: ((142/375) * size-750) + 66px;
 			}
 			
-		#dragon-profile-secondary > .dragon-profile-interactives.common-column,
- 		#dragon-profile-owner-buttons > .dragon-profile-interactives.common-column,
-		#dragon-profile-details-style {
+		#dragon-profile-secondary > .dragon-profile-interactives.common-column, #dragon-profile-owner-buttons > .dragon-profile-interactives.common-column, #dragon-profile-details-style {
 			width: ((8/35) * size-700);
 			}
 			
-		#dragon-profile-secondary > .dragon-profile-dragon.common-column,
- 		#dragon-profile-owner-buttons > .dragon-profile-dragon.common-column,
- 		#dragon-profile-details-misc {
+		#dragon-profile-secondary > .dragon-profile-dragon.common-column, #dragon-profile-owner-buttons > .dragon-profile-dragon.common-column, #dragon-profile-details-misc {
 			width: 0.5 * size-700;
 			}
 			
-		#dragon-profile-secondary > .dragon-profile-familiar.common-column,
-		#dragon-profile-owner-buttons > .dragon-profile-familiar.common-column,
-		#dragon-profile-details-lineage {
+		#dragon-profile-secondary > .dragon-profile-familiar.common-column, #dragon-profile-owner-buttons > .dragon-profile-familiar.common-column, #dragon-profile-details-lineage {
 			width: ((19/70) * size-700);
-			}
-			
-
-		form#new{ /*DMs*/
-			width: customWidth - 273px;	/*677px*/
-			}
-
-		#msg-editor { /*DMs*/
-			width: customWidth - 285px!important; /*665px*/
 			}
 			
 		#msg-show { /*DMs*/
 			margin-bottom: 10px;
 			}
 			
+		#tomo-content {
+			width: size-700;
+			background-repeat: no-repeat;
+			padding: 0 25px;
+			}
 
+		#raffle-background {
+			width: size-735;
+			background-repeat: no-repeat;
+			}
+				
+		#raffle-slots .raffle-slot[data-slot="1"], #raffle-slots .raffle-slot[data-slot="4"] {
+			left: margin-735 + 515px;
+			}
 			
-		/*#form-header {
-			padding-left:0;
-			text-indent:20px;
-			}*/
+		#raffle-slots .raffle-slot[data-slot="2"] {
+			left: margin-735 + 390px;
+			}
+		
+		#raffle-slots .raffle-slot[data-slot="3"] {
+			left: margin-735 + 647px;
+			}
+		
+		#raffle-text {
+			left: margin-735 + 55px;
+			}
+		
+		#raffle-counter-frame {
+			left: margin-735 + 493px;
+			}
+		
+		#roundsey-overlay {
+			left: margin-735 + 510px;
+			}
+		
+		#baldwin-timer {
+			left: (size-750 / (3/2));
+			}
 			
-
-		/*TO DO: Dressing Room, Trading Post vendors, Clan home button*/
-
-
-
-		/*TO DO: make background images fit*/
-
+		#baldwin #speech-bubble, .baldwin-create-instruct {
+			left: margin-Swipp + 25px;
+			}
 			
-			/*Image upscaling; will need a lot of work, maybe fetch higher resolution images when able to like for dragons at the lair etc. Can't with announcements tho
-			if(imgUpscale==1) *TO DO - terminar esto!!!!!!!*/
+		#baldwin.baldwin-transmute #baldwin-xpbar, #baldwin.baldwin-create .baldwin-cauldron-status, #baldwin.baldwin-create #baldwin-xpbar {
+			left: margin-Swipp + 475px;
+			}
 			
-				/*Main page*/
-				/*.announce-text > .bbcode_center { /*Center box*/ /*
-					max-height: 210*(customWidth/950);
-					height:100%;
-				}
-				.announce-text > .bbcode_center > a > img { /*Normal announcements*/ /*
-					max-width:100%;
-					height:100%;
-				}
-				.announce-text > .bbcode_center:nth-of-type(2),
- 				.announce-text > .bbcode_center:nth-of-type(3){ /*Stops the announcement footers from having huge white space gaps in-between*/ /*)
-					height:2.25%;
-				}
-				.announce-text > .bbcode_center > img { /*Festivals*/ /*
-					max-height:65*(customWidth/950);
-					height:(customWidth/6.5);
-				}
-				.bbcode_img [src="https://flightrising.com/dropbox/updates/devupdate.png"] {
-					max-height:118*(customWidth/950);
-					height:100%;
-				}
-				/*Lair*/ /*
-				.lair-page-dragons, .lair-page-dragon, .lair-page-dragon-box {
-					max-height: 167*(customWidth/950);
-					height:100%;
-				}
-				.lair-page-dragons .lair-page-dragon .lair-page-dragon-box {
-					max-height: 132*(customWidth/950);
-					height:100%;
-				}
-				.lair-page-dragons .lair-page-dragon .lair-page-dragon-box .lair-page-dragon-tumbnail,
- 				.lair-page-dragons .lair-page-dragon .lair-page-dragon-box .lair-page-dragon-tumbnail img { /*Lair dragons*/ /*
-					text-align:center;
-					max-height: 100*(customWidth/950);
-					height:100%;
-				}
-			}*/
-	}
+		.flattery-slot-tumbnail-frame > .common-animated-familiar {
+			left: ((famNerd - 100) / 2)!important;
+			}
+
+		#scrybanner {
+			margin-left: margin-700 + 40px;
+			}
+			
+		}
 
 	if(waywrdStn==1) {
+		/* this is something you can do in the site itself, but this is more practical */
 		.ways_button,
  		a[href="https://www1.flightrising.com/waystone"]{
 			display:none;
-			/* this is something you can do in the site itself, but this is more practical */
+			}
+			
 		}
-		
-	}
 
-	if(repeatBnnr==1) { /*I'll try to come up with a more elegant solution to some of these in the future...*/
+	if(repeatBnnr==1) {
+		/*I'll try to come up with a more elegant solution to some of these in the future...*/
 		body,
-		.market-item-result.market-flash-result,
- 		.banner,
- 		#dragon-profile-scene {
+		.market-item-result.market-flash-result, .banner, #dragon-profile-scene {
 			background-repeat: repeat-x;
 			}
-	}
-		
+			
+		}
+
 }
