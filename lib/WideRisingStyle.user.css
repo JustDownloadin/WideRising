@@ -43,7 +43,6 @@
 		size-340 = customWidth - 610px
 		/*Uncertain how global these margin-X formulas are, but better to have them handy i guess*/
 		margin-msg = ((700 - 677) / 2)
-		
 		margin-700 = (0.5 * (size-700)) - 350px
 		margin-400 = (0.5 * customWidth) - 300px
 		margin-35 = ( (31/190) * customWidth) - 120px
