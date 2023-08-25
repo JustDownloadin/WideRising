@@ -16,7 +16,6 @@
 
 ==/UserStyle== */
 
-@import 'lib/mathsValues.styl'
 @-moz-document domain("flightrising.com") {
 
 
@@ -269,7 +268,7 @@
 			}
 			
 		.leftcolumn { /*For the Settings page and its really weird shenanigans...*/
-			background-color: realFun;
+			background-color: #dad6c8;
 			border:none;
 			border-bottom-left-radius: 10px;
 			}
