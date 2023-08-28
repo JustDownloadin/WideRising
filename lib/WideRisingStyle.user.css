@@ -2,7 +2,7 @@
 @name           Wide Rising
 @author         Valen
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        0.4.8
+@version        0.4.9
 @description    Wider layout for Flight Rising plus other improvements.
 @license        MIT
 @preprocessor   stylus
@@ -97,15 +97,15 @@ https://ko-fi.com/valensart
 			width: size-725;
 			}
 		
-		#ticketgrid {
+		#ticketgrid, #custom-shop-trades {
 			width: size-720;
 			}
 			
-		#nest-o-matic, #custom-shop-trades-frame, #super-container > div:last-of-type, #super-container > div:last-of-type >, .divider {
+		#nest-o-matic, #super-container > div:last-of-type, #super-container > div:last-of-type >, .divider {
 			width: size-700!important;
 			}
 		
-		.inner-content, #msgactions, .menu_content, #dr-outfit-page { /*idk why these don't wanna work when grouped with the others - probably that scuffed selector*/
+		.inner-content, #custom-shop-trades-frame, #msgactions, .menu_content { /*idk why these don't wanna work when grouped with the others - probably that scuffed selector*/
 			width: size-700!important;
 			}
 			
@@ -162,9 +162,9 @@ https://ko-fi.com/valensart
 			width: size-400;
 			}
 		
-		.feat, #dr-saved-outfits {
+		.feat {
 			width: size-692
-			}
+		}
 		
 /* ========================== 
 
