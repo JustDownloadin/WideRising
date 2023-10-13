@@ -2,7 +2,7 @@
 @name           Wide Rising
 @author         Valen
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        0.5.1
+@version        0.5.2
 @description    Wider layout for Flight Rising plus other improvements.
 @license        MIT
 @preprocessor   stylus
@@ -181,11 +181,13 @@ https://ko-fi.com/valensart
 			left: margin-735;
 			}
 			
-		#nest_dad, #archaeology-npc-text, #crim-text, #glorious-gift-text, #fantastic-familiar-text, .gather_container > .gather_row:nth-of-type(1) > .gather_box:first-child, /*Meat*/ .gather_container > .gather_row:nth-of-type(2) > .gather_box:first-child /*Plants*/ {
+			/* used to have #nest_dad*/
+		#nest-o-matic, #archaeology-npc-text, #crim-text, #glorious-gift-text, #fantastic-familiar-text, .gather_container > .gather_row:nth-of-type(1) > .gather_box:first-child, /*Meat*/ .gather_container > .gather_row:nth-of-type(2) > .gather_box:first-child /*Plants*/ {
 			margin-left: margin-700;
 			}
 			
-		#nest_mom, .gather_container > .gather_row:nth-of-type(1) > .gather_box:last-child, /*Bugs*/ .gather_container > .gather_row:nth-of-type(2) > .gather_box:last-child /*Scavenging*/ {
+			/* used to have #nest_mom*/
+		.gather_container > .gather_row:nth-of-type(1) > .gather_box:last-child, /*Bugs*/ .gather_container > .gather_row:nth-of-type(2) > .gather_box:last-child /*Scavenging*/ {
 			margin-right: margin-700;
 			}
 		
@@ -392,7 +394,11 @@ https://ko-fi.com/valensart
 		#custom-shop-trades {
 			margin-left: ((23/720) * size-720) - 33px;
 			}
-			
+		
+		/*Hides a random separator line from the nest confirm textbox, which I truly don't know why it's there in the first place*/
+		#parent-trap > img[src="/static/layout/graydot.gif"] {
+			display: none;
+			}
 		 
 			
 		}
