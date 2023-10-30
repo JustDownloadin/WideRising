@@ -2,19 +2,21 @@
 @name           Wide Rising
 @author         Valen
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        0.5.3
-@description    Wider layout for Flight Rising plus other improvements.
+@version        0.8.0
+@description    Wider layout for Flight Rising, plus other improvements.
 @license        MIT
 @preprocessor   stylus
 @updateURL	https://raw.githubusercontent.com/JustDownloadin/WideRising/main/lib/WideRisingStyle.user.css
 
 
-@var checkbox customSize			"+// Change layout size" 1
-@var range customWidth			"Layout width (not recommended to go under 950, may need extra tweaking)"[950, 950, 1900, 10, 'px']
+@var checkbox customSize			"Change layout size" 1
+@var range customWidth			"  ↳ Layout width (not recommended to go under 950, may need extra tweaking)"[950, 950, 1900, 10, 'px']
 	// Second value is the minimum the slider can go to, Third value is the maximum. Change these manually HERE if you need more or less than.
+@var checkbox repeatBnnr		"  ↳ Repeat background images when stretching the layout (avoid empty space at the cost of aesthetics)" 0
+@var range tomoWidth			"  ↳ Width of the Tomo speech bubble" [320, 320, 1000, 5,'px']
 @var checkbox waywrdStn			"Hide the Which Waystone" 0
-@var checkbox repeatBnnr		"Repeat background images when stretching the layout (avoid empty space at the cost of aesthetics)" 0
-@var range tomoWidth			"Width of the Tomo speech bubble" [320, 320, 1000, 5,'px']
+@var checkbox sillyMode			"Enable 'Silly Mode' (experimental features)" 0
+
 
 ==/UserStyle== */
 /*
@@ -28,7 +30,11 @@ https://ko-fi.com/valensart
 
 @-moz-document domain("flightrising.com") {
 
+/* ========================== 
 
+		customSize: Custom Website Width
+		
+=========================== */
 
 	/*GENERIC REFERENCES == Default value // formula ('x' in 'size-X' always the difference between 950 and the specific element ('x')*/
 		size-750 = customWidth - 200px
@@ -37,6 +43,7 @@ https://ko-fi.com/valensart
 		size-725 = customWidth - 225px
 		size-720 = customWidth - 230px
 		size-715 = customWidth - 235px
+		size-702 = customWidth - 248px
 		size-700 = customWidth - 250px
 		size-692 = customWidth - 258px
 		size-680 = customWidth - 270px
@@ -53,6 +60,7 @@ https://ko-fi.com/valensart
 		size-420 = customWidth - 530px
 		size-415 = customWidth - 535px
 		size-400 = customWidth - 550px
+		size-360 = customWidth - 590px
 		size-350 = customWidth - 600px
 		size-340 = customWidth - 610px
 		/*Uncertain how global these margin-X formulas are, but better to have them handy i guess*/
@@ -65,16 +73,15 @@ https://ko-fi.com/valensart
 		margin-Swipp = ((63/125) * size-750) - 403px
 		famNerd = ((1/4) * customWidth - (149/2))
 		
-		/* there's probably a better way to handle these... but tbh i don't really know. once i'm done with stuff i can try and make One All-Encopassing Formula */
-		
+		/* there's probably a better way to handle these... but tbh i don't really know. once i'm done with stuff i can try and make One All-Encopassing Formula
+ 		Possibly using attr()... I'll have to revisit that idea.*/
+	
+
+
 	if(customSize==1) {
 		/*Making it a toggle is good for testing's sake*/
 
-/* ========================== 
-
-		Generic width tweaks
-		
-=========================== */
+/* ========================== Generic width tweaks =========================== */
 
 		#content, #loginarea, #loginarea > div, .container, .banner, .users-online {
 			max-width: customWidth!important;
@@ -101,7 +108,7 @@ https://ko-fi.com/valensart
 			width: size-720;
 			}
 			
-		#nest-o-matic, #super-container > div:last-of-type, #super-container > div:last-of-type >, .divider {
+		.ah-landing-button-container, #nest-o-matic, #super-container > div:last-of-type, #super-container > div:last-of-type >, .divider {
 			width: size-700!important;
 			}
 		
@@ -166,11 +173,18 @@ https://ko-fi.com/valensart
 			width: size-692
 		}
 		
-/* ========================== 
-
-		Generic margin tweaks
+		/*Forums fixes*/
+		#postsheader,
+		table#postlist,
+ 		table#postlist > tbody > tr {
+			width: size-702; 
+			}
 		
-=========================== */
+		table#postlist td.topic {
+			width: size-360; 
+			}
+		
+/* ========================== Generic margin tweaks =========================== */
 
 		#form-header, #msg-editor /*Send DMs form*/ {
 			margin-left: margin-msg;
@@ -191,7 +205,7 @@ https://ko-fi.com/valensart
 			margin-right: margin-700;
 			}
 		
-		#dr-outfit-page > div:nth-of-type(3) {
+		#dr-outfit-page > div:nth-of-type(3), .ah-landing-button, .ah-landing-star {
 			margin-left: margin-700!important;
 			}
 			
@@ -220,11 +234,7 @@ https://ko-fi.com/valensart
 			width: customWidth - tomoWidth;
 			}
 			
-/* ========================== 
-
-		Specific code
-		
-=========================== */		
+/* ========================== Specific code =========================== */		
 	
 		#clan-profile .common-bubble {/*Clan comments*/
 			width: ((96 / 95) * size-420) - 85px;
@@ -395,13 +405,29 @@ https://ko-fi.com/valensart
 			margin-left: ((23/720) * size-720) - 33px;
 			}
 		
-		/*Hides a random separator line from the nest confirm textbox, which I truly don't know why it's there in the first place*/
-		#parent-trap > img[src="/static/layout/graydot.gif"] {
-			display: none;
+		/* Forums */
+		#postsheader span[style="left:408px"] {
+			left: (size-702 - 294px)!important;
 			}
-		 
-			
-		}
+		
+		#postsheader span[style="left:472px"] {
+			left: (size-702 - 230px)!important;
+			}
+		
+		#postsheader span[style="left:520px"] {
+			left: (size-702 - 182px)!important;
+			}
+		
+	}
+}
+
+@-moz-document domain("flightrising.com") {
+
+/* ========================== 
+	
+	waywrdStn: hide the Wayward Stone 
+		
+=========================== */
 
 	if(waywrdStn==1) {
 		/* this is something you can do in the site itself, but this is more practical */
@@ -411,8 +437,18 @@ https://ko-fi.com/valensart
 			}
 			
 		}
+}
+
+@-moz-document domain("flightrising.com") {
+
+/* ========================== 
+	
+	repeatBnnr: repeat Banner 
+		
+=========================== */
 
 	if(repeatBnnr==1) {
+		
 		/*I'll try to come up with a more elegant solution to some of these in the future...*/
 		body,
 		.market-item-result.market-flash-result, .banner, #dragon-profile-scene {
@@ -420,5 +456,49 @@ https://ko-fi.com/valensart
 			}
 			
 		}
+}
 
+@-moz-document domain("flightrising.com") {
+
+/* ========================== 
+	
+	sillyMode: get sillay :3
+		
+=========================== */
+
+	if(sillyMode==1) {
+		
+		/*Hides a random separator line from the nest confirm textbox, which I truly don't know why it's there in the first place*/
+		#parent-trap > img[src="/static/layout/graydot.gif"] {
+			display: none;
+			}
+			
+		/*Adds a top margin to the new hatchling screen. Just personal taste, it doesn't affect anything else*/
+		#nesting-page > fieldset {
+			 margin-top: 50px!important;
+		 	}
+			
+		/*"Converts" the anti-adblock message from an image into pure CSS. And by "convert" I mean "hides the original and replaces it with text"*/
+		.skybanner::after {
+			pointer-events: none;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			color: #C88A7A;
+			line-height: 1.7;
+			display: inline-flex;
+			flex-wrap: wrap;
+			width: 115px;
+			margin-top: 70px;
+			margin-left: 25px;
+			justify-content: space-between;
+			content: "Flight Rising is supported primarily by advertisements." '\A'"Please consider whitelisting us in your ad-blocker so that we can continue to run the site and add new content and features." '\A'"-The FR Team";
+			white-space: pre-line;
+			}	
+			
+		.skybanner {
+			border-radius: 8px;
+			background-color: #731d08;
+			background-image: none!important;
+			}
+	}
 }
