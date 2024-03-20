@@ -2,7 +2,7 @@
 @name           Wide Rising
 @author         Valen
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        0.8.0
+@version        0.8.2
 @description    Wider layout for Flight Rising, plus other improvements.
 @license        MIT
 @preprocessor   stylus
@@ -10,12 +10,12 @@
 
 
 @var checkbox customSize			"Change layout size" 1
-@var range customWidth			"  ↳ Layout width (not recommended to go under 950, may need extra tweaking)"[950, 950, 1900, 10, 'px']
+@var range customWidth			"  ↳ Layout width (limited by the maximum width of your browser window)"[950, 950, 1900, 10, 'px']
 	// Second value is the minimum the slider can go to, Third value is the maximum. Change these manually HERE if you need more or less than.
 @var checkbox repeatBnnr		"  ↳ Repeat background images when stretching the layout (avoid empty space at the cost of aesthetics)" 0
 @var range tomoWidth			"  ↳ Width of the Tomo speech bubble" [320, 320, 1000, 5,'px']
 @var checkbox waywrdStn			"Hide the Which Waystone" 0
-@var checkbox sillyMode			"Enable 'Silly Mode' (experimental features)" 0
+@var checkbox sillyMode			"Enable experimental features" 0
 
 
 ==/UserStyle== */
@@ -236,6 +236,10 @@ https://ko-fi.com/valensart
 			
 /* ========================== Specific code =========================== */		
 	
+		#gather_success_bg {
+			left: ((size-450 / 2) - 100);
+			}		
+
 		#clan-profile .common-bubble {/*Clan comments*/
 			width: ((96 / 95) * size-420) - 85px;
 			}
@@ -417,6 +421,12 @@ https://ko-fi.com/valensart
 		#postsheader span[style="left:520px"] {
 			left: (size-702 - 182px)!important;
 			}
+			
+		#trading-post-content {
+			background-position: center top;
+			}
+		
+		
 		
 	}
 }
